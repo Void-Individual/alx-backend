@@ -60,18 +60,16 @@ class Server:
         page_data = self.get_page(page, page_size)
 
         try:
-            len(self.get_page(page + 1, page_size))
+            assert len(self.get_page(page + 1, page_size))
             next_page = page + 1
         except AssertionError:
             next_page = None
 
-        try:
-            len(self.get_page(page - 1, page_size))
-            prev_page = page - 1
-        except AssertionError:
+        prev_page = page - 1
+        if not prev_page:
             prev_page = None
 
-        data = self.dataset()
+        data = self.__dataset
         total_pages = len(data) / page_size
 
         return {
