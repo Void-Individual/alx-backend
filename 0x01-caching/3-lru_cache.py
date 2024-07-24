@@ -21,7 +21,6 @@ class LRUCache(BaseCaching):
 
     def put(self, key, item):
         """Method to insert a new key in the dict"""
-        print(self.accessed_times)
         if key and item:
             if key in self.cache_data:
                 self.cache_data[key] = item
@@ -36,7 +35,6 @@ class LRUCache(BaseCaching):
 
             self.increment_timer()
             self.accessed_times[key] = self.current_timer
-        print(self.accessed_times)
 
     def get(self, key):
         """Method to retrieve an item with a key"""
