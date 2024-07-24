@@ -5,7 +5,8 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LRUCache(BaseCaching):
-    """Class to implement caching, inheriting from base"""
+    """Class to implement caching, inheriting from base implementing
+    the least recently used algorithm"""
 
     def __init__(self):
         """Instantiation"""
@@ -21,6 +22,7 @@ class LRUCache(BaseCaching):
 
     def put(self, key, item):
         """Method to insert a new key in the dict"""
+
         if key and item:
             if key in self.cache_data:
                 self.cache_data[key] = item

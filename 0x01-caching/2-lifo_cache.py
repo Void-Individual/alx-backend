@@ -5,7 +5,7 @@ BaseCaching = __import__('base_caching').BaseCaching
 
 
 class LIFOCache(BaseCaching):
-    """Class to implement the fifo system"""
+    """Class to implement the Last in First Out algorithm"""
 
     def __init__(self):
         """Instantiation"""
