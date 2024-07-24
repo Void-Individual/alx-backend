@@ -19,12 +19,13 @@ class LIFOCache(BaseCaching):
         if key and item:
             if key in self.cache_data:
                 del self.cache_data[key]
-            elif len(self.cache_data) == self.MAX_ITEMS:
-                for x, last_key in enumerate(self.cache_data.keys()):
-                    if x == 3:
-                        del self.cache_data[last_key]
-                        print(f"Discard: {last_key}")
-                        break
+            else:
+                if len(self.cache_data) == self.MAX_ITEMS:
+                    for x, last_key in enumerate(self.cache_data.keys()):
+                        if x == 3:
+                            del self.cache_data[last_key]
+                            print(f"Discard: {last_key}")
+                            break
             self.cache_data[key] = item
 
     def get(self, key):

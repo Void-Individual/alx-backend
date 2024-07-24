@@ -18,7 +18,7 @@ class BaseCaching():
         """ Print the cache
         """
         print("Current cache:")
-        for key in sorted(self.cache_data.keys()):
+        for key in self.cache_data.keys():
             print("{}: {}".format(key, self.cache_data.get(key)))
 
     def put(self, key, item):
