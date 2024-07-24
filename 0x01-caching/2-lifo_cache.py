@@ -4,7 +4,7 @@
 BaseCaching = __import__('base_caching').BaseCaching
 
 
-class FIFOCache(BaseCaching):
+class LIFOCache(BaseCaching):
     """Class to implement the fifo system"""
 
     def __init__(self):
@@ -20,10 +20,11 @@ class FIFOCache(BaseCaching):
             if key in self.cache_data:
                 del self.cache_data[key]
             elif len(self.cache_data) == self.MAX_ITEMS:
-                for first_key in self.cache_data.keys():
-                    del self.cache_data[first_key]
-                    print(f"Discard: {first_key}")
-                    break
+                for x, last_key in enumerate(self.cache_data.keys()):
+                    if x == 3:
+                        del self.cache_data[last_key]
+                        print(f"Discard: {last_key}")
+                        break
             self.cache_data[key] = item
 
     def get(self, key):
