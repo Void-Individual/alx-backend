@@ -26,12 +26,11 @@ class FIFOCache(BaseCaching):
                         print(f"Discard: {first_key}")
                         break
             self.cache_data[key] = item
+        else:
+            return
 
     def get(self, key):
         """Method to retrieve the value of the key linked to the dict
         if it doesn't exist, retuen none"""
 
-        if key and key in self.cache_data:
-            return self.cache_data[key]
-
-        return None
+        return self.cache_data.get(key)
