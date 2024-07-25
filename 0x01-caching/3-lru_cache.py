@@ -24,7 +24,7 @@ class LRUCache(BaseCaching):
         """Method to enable the lru deletion"""
         if len(self.cache_data) == self.MAX_ITEMS:
             lru_key = max(self.access_times, key=self.access_times.get)
-            print(f"Discard: {lru_key}")
+            print(f"DISCARD: {lru_key}")
             del self.cache_data[lru_key]
             del self.access_times[lru_key]
 
