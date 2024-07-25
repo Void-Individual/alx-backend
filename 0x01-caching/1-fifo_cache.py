@@ -2,6 +2,7 @@
 """Module to create a caching system inheriting from basecaching"""
 
 BaseCaching = __import__('base_caching').BaseCaching
+from collections import OrderedDict
 
 
 class FIFOCache(BaseCaching):
@@ -11,26 +12,22 @@ class FIFOCache(BaseCaching):
         """Instantiation"""
 
         super().__init__()
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """Method to add a new key, value data to the inherited
         self.cache_data dict"""
 
-        if key and item:
-            if key in self.cache_data:
-                del self.cache_data[key]
-            else:
-                if len(self.cache_data) == self.MAX_ITEMS:
-                    for first_key in self.cache_data.keys():
-                        del self.cache_data[first_key]
-                        print(f"Discard: {first_key}")
-                        break
-            self.cache_data[key] = item
-        else:
+        if key is None or item is None:
             return
+
+        self.cache_data[key] = item
+        if len(self.cache_data) > self.MAX_ITEMS:
+            first_key, _ = self.cache_data.popitem(False)
+            print(f"Discard: {first_key}")
 
     def get(self, key):
         """Method to retrieve the value of the key linked to the dict
         if it doesn't exist, retuen none"""
 
-        return self.cache_data.get(key)
+        return self.cache_data.get(key, None)
