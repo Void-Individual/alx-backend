@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Module to create a caching system inheriting from basecaching"""
 
-BaseCaching = __import__('base_caching').BaseCaching
 from collections import OrderedDict
+BaseCaching = __import__('base_caching').BaseCaching
 
 
 class FIFOCache(BaseCaching):
