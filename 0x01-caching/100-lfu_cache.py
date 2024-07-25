@@ -34,7 +34,7 @@ class LFUCache(BaseCaching):
         """Method to enable the lru deletion"""
 
         lru_key = min(keys, key=self.access_times.get)
-        print(f"Discard: {lru_key}")
+        print(f"DISCARD: {lru_key}")
         del self.cache_data[lru_key]
         del self.access_times[lru_key]
         del self.access_freq[lru_key]
