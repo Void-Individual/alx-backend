@@ -24,7 +24,7 @@ class LIFOCache(BaseCaching):
                     for x, last_key in enumerate(self.cache_data.keys()):
                         if x == 3:
                             del self.cache_data[last_key]
-                            print(f"Discard: {last_key}")
+                            print(f"DISCARD: {last_key}")
                             break
             self.cache_data[key] = item
 
