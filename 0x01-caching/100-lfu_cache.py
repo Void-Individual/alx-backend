@@ -24,7 +24,7 @@ class LFUCache(BaseCaching):
     def lfu(self):
         """Method to implement lfu deletion"""
 
-        if len(self.cache_data) == self.MAX_ITEMS:
+        if len(self.cache_data) == BaseCaching.MAX_ITEMS:
             lowest = min(self.access_freq.values())
             low_keys = [key for key, value in self.access_freq.items()
                         if value == lowest]
