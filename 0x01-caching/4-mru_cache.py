@@ -32,17 +32,15 @@ class MRUCache(BaseCaching):
     def put(self, key, item):
         """Method to insert a new key in the dict"""
 
-        if key is None and item is None:
-            return
+        if key and item:
+            if key in self.cache_data:
+                self.cache_data[key] = item
+            else:
+                self.mru()
+                self.cache_data[key] = item
 
-        if key in self.cache_data:
-            self.cache_data[key] = item
-        else:
-            self.mru()
-            self.cache_data[key] = item
-
-        self.increment_timer()
-        self.access_times[key] = self.current_timer
+            self.increment_timer()
+            self.access_times[key] = self.current_timer
 
     def get(self, key):
         """Method to retrieve an item with a key"""
