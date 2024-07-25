@@ -11,7 +11,7 @@ class LRUCache(BaseCaching):
     def __init__(self):
         """Instantiation"""
 
-        self.accessed_times = {}
+        self.access_times = {}
         self.current_timer = 0
         super().__init__()
 
@@ -20,6 +20,14 @@ class LRUCache(BaseCaching):
 
         self.current_timer += 1
 
+    def lru(self):
+        """Method to enable the lru deletion"""
+        if len(self.cache_data) == self.MAX_ITEMS:
+            lru_key = max(self.access_times, key=self.access_times.get)
+            print(f"Discard: {lru_key}")
+            del self.cache_data[lru_key]
+            del self.access_times[lru_key]
+
     def put(self, key, item):
         """Method to insert a new key in the dict"""
 
@@ -27,23 +35,18 @@ class LRUCache(BaseCaching):
             if key in self.cache_data:
                 self.cache_data[key] = item
             else:
-                if len(self.cache_data) == self.MAX_ITEMS:
-                    lru_key = min(self.accessed_times,
-                                  key=self.accessed_times.get)
-                    print(f"Discard: {lru_key}")
-                    del self.cache_data[lru_key]
-                    del self.accessed_times[lru_key]
+                self.lru()
                 self.cache_data[key] = item
 
             self.increment_timer()
-            self.accessed_times[key] = self.current_timer
+            self.access_times[key] = self.current_timer
 
     def get(self, key):
         """Method to retrieve an item with a key"""
 
         if key and key in self.cache_data:
             # self.increment_timer()
-            # self.accessed_times[key] += self.current_timer
+            # self.access_times[key] += self.current_timer
             return self.cache_data[key]
 
         return None
