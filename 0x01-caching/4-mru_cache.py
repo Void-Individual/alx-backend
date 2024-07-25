@@ -25,7 +25,7 @@ class MRUCache(BaseCaching):
 
         if len(self.cache_data) == self.MAX_ITEMS:
             mru_key = max(self.access_times, key=self.access_times.get)
-            print(f"Discard: {mru_key}")
+            print(f"DISCARD: {mru_key}")
             del self.cache_data[mru_key]
             del self.access_times[mru_key]
 
