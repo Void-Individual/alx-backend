@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Module to create a caching system inheriting from basecaching"""
 
+from collections import OrderedDict
 BaseCaching = __import__('base_caching').BaseCaching
 
 
@@ -11,22 +12,19 @@ class LIFOCache(BaseCaching):
         """Instantiation"""
 
         super().__init__()
+        self.cache_data = OrderedDict()
 
     def put(self, key, item):
         """Method to add a new key, value data to the inherited
         self.cache_data dict"""
 
-        if key and item:
-            if key in self.cache_data:
-                del self.cache_data[key]
-            else:
-                if len(self.cache_data) == self.MAX_ITEMS:
-                    for x, last_key in enumerate(self.cache_data.keys()):
-                        if x == 3:
-                            del self.cache_data[last_key]
-                            print(f"DISCARD: {last_key}")
-                            break
-            self.cache_data[key] = item
+        if key is None or item is None:
+            return
+
+        self.cache_data[key] = item
+        if len(self.cache_data) == self.MAX_ITEMS:
+            last_key, _ = self.cache_data.popitem(last=True)
+            print(f"DISCARD: {last_key}")
 
     def get(self, key):
         """Method to retrieve the value of the key linked to the dict
