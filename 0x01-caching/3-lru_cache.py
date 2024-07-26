@@ -45,8 +45,8 @@ class LRUCache(BaseCaching):
         """Method to retrieve an item with a key"""
 
         if key and key in self.cache_data:
-            # self.increment_timer()
-            # self.access_times[key] = self.current_timer
+            self.increment_timer()
+            self.access_times[key] = self.current_timer
             return self.cache_data[key]
 
         return None
