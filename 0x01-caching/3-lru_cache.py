@@ -22,11 +22,10 @@ class LRUCache(BaseCaching):
 
     def lru(self):
         """Method to enable the lru deletion"""
-        if len(self.cache_data) == self.MAX_ITEMS:
-            lru_key = max(self.access_times, key=self.access_times.get)
-            print(f"DISCARD: {lru_key}")
-            del self.cache_data[lru_key]
-            del self.access_times[lru_key]
+        lru_key = min(self.access_times, key=self.access_times.get)
+        print(f"DISCARD: {lru_key}")
+        del self.cache_data[lru_key]
+        del self.access_times[lru_key]
 
     def put(self, key, item):
         """Method to insert a new key in the dict"""
@@ -35,7 +34,8 @@ class LRUCache(BaseCaching):
             if key in self.cache_data:
                 self.cache_data[key] = item
             else:
-                self.lru()
+                if len(self.cache_data) == self.MAX_ITEMS:
+                    self.lru()
                 self.cache_data[key] = item
 
             self.increment_timer()
@@ -46,7 +46,7 @@ class LRUCache(BaseCaching):
 
         if key and key in self.cache_data:
             # self.increment_timer()
-            # self.access_times[key] += self.current_timer
+            # self.access_times[key] = self.current_timer
             return self.cache_data[key]
 
         return None
