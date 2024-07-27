@@ -47,7 +47,7 @@ class MRUCache(BaseCaching):
 
         if key and key in self.cache_data:
             self.increment_timer()
-            self.access_times[key] += self.current_timer
+            self.access_times[key] = self.current_timer
             return self.cache_data[key]
 
         return None
