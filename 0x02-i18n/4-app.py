@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Method to setup a basic flask app with babel"""
+"""Method to setup a basic flask app with babel and some templates"""
 
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, gettext
 
 
 class Config():
