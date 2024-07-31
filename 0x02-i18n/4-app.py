@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Method to setup a basic flask app with babel and some templates"""
+"""Method to setup a basic flask app with babel and some templates
+and forcing the locale with a parameter"""
 
 from flask import Flask, render_template, request
 from flask_babel import Babel, gettext
@@ -15,6 +16,7 @@ class Config():
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.url_map.strict_slashes=False
 babel = Babel(app)
 
 
@@ -22,14 +24,18 @@ babel = Babel(app)
 def get_locale():
     """Function to select a locale"""
 
+    locale = request.args.get("locale")
+    if locale in app.config['LANGUAGES']:
+        return locale
+
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def welcome():
     """Route to output the welcome template"""
 
-    return render_template('0-index.html')
+    return render_template('3-index.html')
 
 
 if __name__ == '__main__':
