@@ -29,7 +29,7 @@ def get_locale():
 def welcome():
     """Route to output the welcome template"""
 
-    return render_template('0-index.html')
+    return render_template('2-index.html')
 
 
 if __name__ == '__main__':
