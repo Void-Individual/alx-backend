@@ -39,7 +39,7 @@ def get_locale():
         return locale
     elif user and user.get('locale') in app.config['LANGUAGES']:
         return user['locale']
-    elif header  in app.config['LANGUAGES']:
+    elif header in app.config['LANGUAGES']:
         return header
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
@@ -48,8 +48,8 @@ def get_locale():
 def welcome():
     """Route to output the welcome template"""
     if g.user:
-        return render_template('5-index.html', user=g.user)
-    return render_template('5-index.html', user=None)
+        return render_template('6-index.html', user=g.user)
+    return render_template('6-index.html', user=None)
 
 
 def get_user():
