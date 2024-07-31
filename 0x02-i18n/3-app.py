@@ -9,12 +9,13 @@ class Config():
     """Class to store available languages"""
 
     LANGUAGES = ["en", "fr"]
-    BABEL_DEFAULT_LOCALE = "en"
+    BABEL_DEFAULT_LOCALE = "fr"
     BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.url_map.strict_slashes=False
 babel = Babel(app)
 
 
@@ -25,14 +26,11 @@ def get_locale():
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/')
 def welcome():
     """Route to output the welcome template"""
 
-    home_title = gettext("home_title")
-    home_header = gettext("home_header")
-
-    return render_template('3-index.html', home_title=home_title, home_header=home_header)
+    return render_template('3-index.html')
 
 
 if __name__ == '__main__':
